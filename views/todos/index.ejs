@@ -1,0 +1,32 @@
+<% layout('layouts/boilerplate') %>
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <h1>Todo List</h1>
+        <a href="/todos/new" class="btn btn-primary mb-3">Add New Todo</a>
+        <div class="mb-3">
+        <div class="list-group ">
+            <% todos.forEach(todo => { %>
+                <div class="list-group-item d-flex justify-content-between ">
+                    <span class=" m-3 <%= todo.completed ? 'text-decoration-line-through text-muted' : '' %>">
+                        <%= todo.title %>
+                    </span>
+
+
+                    <div class="d-flex">
+                        <form action="/todos/<%= todo._id %>?_method=PUT" method="POST">
+                            <button class="btn btn-success btn-sm m-3">
+                                <%= todo.completed ? 'Undo' : 'Complete' %>
+                            </button>
+                        </form>
+                        <form action="/todos/<%= todo._id %>?_method=DELETE" method="POST">
+                            <button class="btn btn-danger btn-sm m-3">Delete</button>
+                        </form>
+                    </div>
+
+
+                </div>
+            <% }); %>
+        </div>
+        </div>
+    </div>
+</div>
